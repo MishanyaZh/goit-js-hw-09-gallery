@@ -23,15 +23,6 @@ const overlayRef = document.querySelector('.lightbox__overlay');
 //  клик на div.lightbox__overlay. => closeModal
 overlayRef.addEventListener('click', closeModal);
 
-// ---8 escape ---
-document.addEventListener('keydown', evt => {
-    if (evt.code !== 'Escape') {
-        return;
-    }
-    closeModal()
-});
-
-
 
 // --- 9 --- right left
 const bigImageArrow = [];
@@ -60,7 +51,6 @@ function onLeftKeyClick(evt) {
     //     // lightboxImageRef.src = bigImageArrow.length-1
     // }
 }
-
 
 
 // markup (rezultat roboty function, et o sozdanie rozmetky)
@@ -129,6 +119,17 @@ function onGalleryContainerClick(event) {
 
     // onRightKeyClick();
     // onLeftKeyClick();
+
+    // ---8 escape ---
+    document.addEventListener('keydown', closeEscape);
+
+}
+
+function closeEscape (evt) {
+    if (evt.code !== 'Escape') {
+        return;
+    }
+    closeModal()
 }
 
 // --- 5 --- Закрытие модального окна по клику на кнопку button[data-action="close-lightbox"].
@@ -141,4 +142,5 @@ function closeModal(event) {
 
     window.removeEventListener('keydown', onRightKeyClick);
     window.removeEventListener('keydown', onLeftKeyClick);
+    document.removeEventListener('keydown', closeEscape);
 }
